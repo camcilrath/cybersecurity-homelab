@@ -1,11 +1,24 @@
-[cybersecurity_homelab_readme.md](https://github.com/user-attachments/files/23199567/cybersecurity_homelab_readme.md)
-# cybersecurity-homelab
-
+<div align="center">
+# Cybersecurity Homelab
+  
 > A self-hosted cybersecurity training lab using Wazuh SIEM and Sysmon telemetry
+
+![Status](https://img.shields.io/badge/status-active-brightgreen?style=for-the-badge&logo=linux)
+![Ubuntu](https://img.shields.io/badge/Ubuntu%20Server-22.04%20LTS-orange?style=for-the-badge&logo=ubuntu)
+![Wazuh](https://img.shields.io/badge/SIEM-Wazuh-blue?style=for-the-badge&logo=elasticstack&logoColor=white)
+![Sysmon](https://img.shields.io/badge/Telemetry-Sysmon%20Logs-cyan?style=for-the-badge&logo=microsoft&logoColor=white)
+![Windows](https://img.shields.io/badge/Endpoint-Windows%2010%2F11-blue?style=for-the-badge&logo=windows&logoColor=white)
+![GitHub](https://img.shields.io/badge/Repo%20Type-Public-lightgrey?style=for-the-badge&logo=github)
+![License](https://img.shields.io/badge/License-MIT-lightgrey?style=for-the-badge)
+
+![Security](https://img.shields.io/badge/Focus-SOC%20%2F%20SIEM%20Training-darkblue?style=for-the-badge&logo=securityscorecard&logoColor=white)
+![Elastic](https://img.shields.io/badge/Backend-Elasticsearch-blue?style=for-the-badge&logo=elasticsearch&logoColor=white)
+![Shell](https://img.shields.io/badge/Scripting-Bash%20%26%20PowerShell-lightblue?style=for-the-badge&logo=gnubash&logoColor=white)
 
 &#x20; &#x20;
 
 ---
+<div align="left">
 
 ## 📖 Overview
 
@@ -107,6 +120,9 @@ For more detail, see sections below on deployment and troubleshooting.
 ### 0. Hardware & Network Prereqs
 
 - A spare machine / old laptop to act as the SIEM server
+  - Used an old Dell laptop
+    - Upgraded Ram from 4gb to 8gb
+    - Upgraded the hard drive from a 250gb HHD to a 250gb SSD    
   - Install Ubuntu Server 22.04 LTS
   - Give it a static IP on your LAN (`<MANAGER_IP>`)
 - A Windows PC or VM to act as the monitored endpoint
@@ -165,8 +181,6 @@ This gets you:
 
 On Ubuntu Server, you generally want a static IP so your SIEM is always reachable at the same address.
 
-Example Netplan file (do NOT commit real IPs):
-
 ```yaml
 # configs/netplan-example.yaml
 network:
@@ -175,8 +189,8 @@ network:
     eno1:
       dhcp4: no
       addresses:
-        - <MANAGER_IP>/24        # e.g. 192.168.4.10/24
-      gateway4: <GATEWAY_IP>     # e.g. 192.168.4.1
+        - <MANAGER_IP>/24        # e.g. 192.168.x.xx/24
+      gateway4: <GATEWAY_IP>     # e.g. 192.168.x.xx
       nameservers:
         addresses:
           - 1.1.1.1
@@ -539,28 +553,6 @@ If you accidentally commit something sensitive (ex: real LAN IPs, screenshots wi
 3. Update this README to note that you rotated the secret.
 
 > Never expose your live Wazuh dashboard to the open internet unless you know exactly what you're doing (reverse proxy, auth, firewalling, etc.). Lab stays on LAN.
-
----
-
-## 🔎 How This Helps in Interviews
-
-This lab demonstrates:
-
-- Linux server administration (Ubuntu Server install, static IP, SSH setup)
-- SIEM deployment and tuning (Wazuh All-in-One)
-- Windows telemetry onboarding (Wazuh Agent + Sysmon)
-- Network / access troubleshooting (subnet mismatches, SSH auth, routing)
-- Detection validation (PowerShell abuse, brute force login simulation)
-- Incident response mindset (collecting evidence, asking “is this normal?”)
-
-You can literally walk a hiring manager through:
-
-1. How an alert was generated
-2. Where you saw it in Wazuh
-3. What it meant / how you'd escalate it
-4. What you'd recommend next (lockout, reset credentials, isolate host, etc.)
-
-This is exactly what a SOC Tier 1 / Tier 2 analyst gets asked to do.
 
 ---
 
